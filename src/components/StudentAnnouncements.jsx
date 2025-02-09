@@ -22,7 +22,7 @@ const StudentAnnouncements = () => {
   // Fetch Announcements from the backend
   const fetchAnnouncements = async () => {
   try {
-    const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/announcement/all");
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/announcement/all`);
 
     // ✅ Sort announcements by createdAt in descending order (latest first)
     const sortedAnnouncements = response.data

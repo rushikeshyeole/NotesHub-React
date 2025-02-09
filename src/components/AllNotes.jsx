@@ -24,7 +24,7 @@ const AllNotes = () => {
 
   const fetchNotes = async () => {
     try {
-      const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/teacher/allnotes");
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/teacher/allnotes`);
   
       // Ensure the date is formatted as YYYY-MM-DD (same as TeacherDashboard)
       const formattedNotes = response.data.map((note) => ({

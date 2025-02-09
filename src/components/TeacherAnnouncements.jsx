@@ -25,7 +25,7 @@ const TeacherAnnouncements = () => {
   // Fetch all announcements
   const fetchAnnouncements = async () => {
     try {
-      const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/announcement/all");
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/announcement/all`);
   
       // ✅ Format the date as 'YYYY-MM-DD'
       const formattedAnnouncements = response.data.map((announcement) => ({

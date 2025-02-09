@@ -25,7 +25,7 @@ const Analytics = () => {
 
   const fetchMostDownloadedNotes = async () => {
     try {
-      const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/teacher/most-downloaded");
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/teacher/most-downloaded`);
       setNotes(response.data);
     } catch (error) {
       console.error("Error fetching analytics:", error);
