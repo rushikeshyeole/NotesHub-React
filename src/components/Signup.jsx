@@ -22,7 +22,7 @@ const SignUp = () => {
     setSuccessMessage(''); // Reset success message
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/signup', userData);
+      const response = await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/auth/signup', userData);
 
       if (response.data === 'Invalid Faculty Code!') {
         // If the faculty code is invalid, set an error message

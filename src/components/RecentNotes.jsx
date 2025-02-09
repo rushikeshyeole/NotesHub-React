@@ -22,7 +22,7 @@ const RecentNotes = () => {
 
   const fetchRecentNotes = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/teacher/recent-notes");
+      const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/teacher/recent-notes");
       setRecentNotes(response.data);
     } catch (error) {
       console.error("Error fetching recent notes:", error);
@@ -32,7 +32,7 @@ const RecentNotes = () => {
 
   const handleDownload = async (noteId, fileName) => {
     try {
-      const response = await axios.get(`http://localhost:8080/teacher/download/${noteId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/teacher/download/${noteId}`, {
         responseType: "blob",
       });
 

@@ -41,7 +41,7 @@ const fetchNotes = async () => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:8080/teacher/notes/${teacherId}`);
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/teacher/notes/${teacherId}`);
     
     // ✅ Ensure correct date format
     const formattedNotes = response.data.map((note) => ({
@@ -57,10 +57,6 @@ const fetchNotes = async () => {
 };
 
 
-// Call fetchNotes when the component mounts
-// useEffect(() => {
-//   fetchNotes();
-// }, []);
 
   
 
@@ -70,42 +66,7 @@ const fetchNotes = async () => {
 
 
 
-// const handleUpload = async () => {
-//   if (!file || !fileName || !fileLanguage) {
-//     alert("Please fill all fields and select a file.");
-//     return;
-//   }
 
-//   if (!teacherId) {
-//     alert("Teacher ID not found. Please log in again.");
-//     return;
-//   }
-
-//   const formData = new FormData();
-//   formData.append("file", file);
-//   formData.append("fileName", fileName);
-//   formData.append("fileLanguage", fileLanguage);
-
-//   try {
-//     await axios.post(`http://localhost:8080/teacher/upload/${teacherId}`, formData, {
-//       headers: { "Content-Type": "multipart/form-data" },
-//     });
-
-//     alert("Note uploaded successfully!");
-//     fetchNotes(); // Refresh notes list
-
-//     // ✅ Close the modal after successful upload
-//     document.getElementById("uploadModal").close();
-
-//     // ✅ Clear input fields after upload
-//     setFile(null);
-//     setFileName("");
-//     setFileLanguage("");
-//   } catch (error) {
-//     console.error("Error uploading note:", error);
-//     alert("Failed to upload note.");
-//   }
-// };
 
 
 
@@ -120,7 +81,7 @@ const handleUpload = async () => {
   formData.append("fileLanguage", fileLanguage);
 
   try {
-    await axios.post(`http://localhost:8080/teacher/upload/${teacherId}`, formData, {
+    await axios.post(`${process.env.REACT_APP_API_BASE_URL}/teacher/upload/${teacherId}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
@@ -156,7 +117,7 @@ const handleDelete = async () => {
   if (!noteToDelete) return; // Ensure there's a valid note selected
 
   try {
-    const response = await axios.delete(`http://localhost:8080/teacher/delete/${noteToDelete}`);
+    const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/teacher/delete/${noteToDelete}`);
     if (response.status === 200) {
       setShowDeleteConfirmation(false); // Close pop-up first
       setDeleteSuccessMessage("Note deleted successfully!");
@@ -170,63 +131,12 @@ const handleDelete = async () => {
 
 
 
-// const handleDelete = async (noteId) => {
-//   if (!window.confirm("Are you sure you want to delete this note?")) {
-//     return; // Stop if user cancels
-//   }
 
-//   try {
-//     const response = await axios.delete(`http://localhost:8080/teacher/delete/${noteId}`);
-    
-//     if (response.status === 200) {
-//       setDeleteMessage("Note deleted successfully!"); // ✅ Show success message
-//       fetchNotes(); // Refresh notes list
-
-//       // Hide message after 3 seconds
-//       setTimeout(() => setDeleteMessage(""), 3000);
-//     } else {
-//       setDeleteMessage("Failed to delete note.");
-//       setTimeout(() => setDeleteMessage(""), 3000);
-//     }
-//   } catch (error) {
-//     console.error("Error deleting note:", error);
-//     setDeleteMessage("Failed to delete note.");
-//     setTimeout(() => setDeleteMessage(""), 3000);
-//   }
-// };
-
-
-
-  // const handleDelete = async (noteId) => {
-  //   console.log("Deleting note with ID:", noteId); // Debugging
-  
-  //   if (!noteId) {
-  //     alert("Error: Note ID is undefined. Cannot delete.");
-  //     return;
-  //   }
-  
-  //   if (!window.confirm("Are you sure you want to delete this note?")) {
-  //     return; // Confirm before deleting
-  //   }
-  
-  //   try {
-  //     const response = await axios.delete(`http://localhost:8080/teacher/delete/${noteId}`);
-  //     if (response.status === 200) {
-  //       alert("Note deleted successfully!");
-  //       fetchNotes(); // Refresh notes list
-  //     } else {
-  //       alert("Failed to delete note.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error deleting note:", error);
-  //     alert("Failed to delete note.");
-  //   }
-  // };
   
   
   const handleDownload = async (noteId, fileName) => {
     try {
-      const response = await axios.get(`http://localhost:8080/teacher/download/${noteId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/teacher/download/${noteId}`, {
         responseType: "blob", // Important: Treat response as a binary file
       });
   

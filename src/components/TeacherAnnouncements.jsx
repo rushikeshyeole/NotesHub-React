@@ -25,7 +25,7 @@ const TeacherAnnouncements = () => {
   // Fetch all announcements
   const fetchAnnouncements = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/announcement/all");
+      const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/announcement/all");
   
       // ✅ Format the date as 'YYYY-MM-DD'
       const formattedAnnouncements = response.data.map((announcement) => ({
@@ -56,7 +56,7 @@ const handleAddAnnouncement = async () => {
   
     try {
       const response = await axios.post(
-        `http://localhost:8080/announcement/add/${teacherId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/announcement/add/${teacherId}`,
         new URLSearchParams({ message }), // ✅ Convert to URL-encoded format
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
@@ -88,7 +88,7 @@ const handleAddAnnouncement = async () => {
     // if (!window.confirm("Are you sure you want to delete this announcement?")) return;
 
     try {
-      await axios.delete(`http://localhost:8080/announcement/delete/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/announcement/delete/${id}`);
       fetchAnnouncements();
       // alert("Announcement deleted successfully!");
     } catch (error) {

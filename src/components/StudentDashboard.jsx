@@ -28,7 +28,7 @@ const StudentDashboard = () => {
   
   const fetchNotes = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/teacher/allnotes");
+      const response = await axios.get("${process.env.REACT_APP_API_BASE_URL}/teacher/allnotes");
   
       // Ensure the date is formatted as YYYY-MM-DD (same as TeacherDashboard)
       const formattedNotes = response.data.map((note) => ({
@@ -59,7 +59,7 @@ const StudentDashboard = () => {
   // Handle download
   const handleDownload = async (noteId, fileName) => {
     try {
-      const response = await axios.get(`http://localhost:8080/teacher/download/${noteId}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/teacher/download/${noteId}`, {
         responseType: "blob",
       });
 
